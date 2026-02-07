@@ -52,7 +52,7 @@ const Contact = () => {
     {
       icon: MessageCircle,
       label: 'Telegram',
-      value: '@bobur_metalworks',
+      value: '@Bkforge',
       href: 'https://t.me/bobur_metalworks',
     },
   ];
@@ -202,12 +202,12 @@ const Contact = () => {
                   size="lg"
                   className="flex-1 bg-[#0088cc] hover:bg-[#0088cc]/90 transition-all hover:scale-[1.02]"
                 >
-                  <a href="https://t.me/bobur_metalworks" target="_blank" rel="noopener noreferrer">
+                  <a href="https://t.me/Bkforge" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="mr-2 h-5 w-5" />
                     Telegram
                   </a>
                 </Button>
-                <Button
+                {/* <Button
                   asChild
                   size="lg"
                   className="flex-1 bg-[#25D366] hover:bg-[#25D366]/90 transition-all hover:scale-[1.02]"
@@ -216,7 +216,7 @@ const Contact = () => {
                     <Phone className="mr-2 h-5 w-5" />
                     WhatsApp
                   </a>
-                </Button>
+                </Button> */}
               </motion.div>
 
               {/* Call to action */}

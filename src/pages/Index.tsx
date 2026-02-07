@@ -1,25 +1,43 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Award, Clock, DoorClosed, Fence, Phone } from 'lucide-react';
-import { Layout } from '@/components/Layout';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
-import { AnimatedCounter } from '@/components/AnimatedCounter';
-import { SectionTitle } from '@/components/SectionTitle';
-import { ServiceCard } from '@/components/ServiceCard';
-import { ProjectCard } from '@/components/ProjectCard';
-import { OrderModal } from '@/components/OrderModal';
-import { GuaranteeSection } from '@/components/GuaranteeSection';
-import { projects } from '@/data/projects';
-import heroImage from '@/assets/hero-metalwork.jpg';
-import gateImage from '@/assets/service-gate.jpg';
-import doorImage from '@/assets/service-door.jpg';
-import fenceImage from '@/assets/service-fence.jpg';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Shield,
+  Award,
+  Clock,
+  DoorClosed,
+  Fence,
+  Phone,
+} from "lucide-react";
+import { Layout } from "@/components/Layout";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { SectionTitle } from "@/components/SectionTitle";
+import { ServiceCard } from "@/components/ServiceCard";
+import { ProjectCard } from "@/components/ProjectCard";
+import { OrderModal } from "@/components/OrderModal";
+import { GuaranteeSection } from "@/components/GuaranteeSection";
+import { projects } from "@/data/projects";
+import heroImage from "@/assets/hero-metalwork.jpg";
+import gateImage from "@/assets/service-gate.jpg";
+import doorImage from "@/assets/service-door.jpg";
+import fenceImage from "@/assets/service-fence.jpg";
+import introVideo from "@/assets/video_uyx.mp4";
+import VideoSection from "@/components/Video";
 
 // Gate icon component
 const GateIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <rect x="2" y="4" width="8" height="16" rx="1" />
     <rect x="14" y="4" width="8" height="16" rx="1" />
     <line x1="6" y1="8" x2="6" y2="12" />
@@ -34,34 +52,34 @@ const Index = () => {
   const services = [
     {
       icon: GateIcon,
-      title: t('services.gates.title'),
-      description: t('services.gates.description'),
+      title: t("services.gates.title"),
+      description: t("services.gates.description"),
       image: gateImage,
     },
     {
       icon: DoorClosed,
-      title: t('services.doors.title'),
-      description: t('services.doors.description'),
+      title: t("services.doors.title"),
+      description: t("services.doors.description"),
       image: doorImage,
     },
     {
       icon: Fence,
-      title: t('services.fences.title'),
-      description: t('services.fences.description'),
+      title: t("services.fences.title"),
+      description: t("services.fences.description"),
       image: fenceImage,
     },
   ];
 
   const stats = [
-    { value: 15, suffix: '+', label: t('stats.years') },
-    { value: 500, suffix: '+', label: t('stats.projects') },
-    { value: 450, suffix: '+', label: t('stats.clients') },
+    { value: 15, suffix: "+", label: t("stats.years") },
+    { value: 500, suffix: "+", label: t("stats.projects") },
+    { value: 450, suffix: "+", label: t("stats.clients") },
   ];
 
   const features = [
-    { icon: Shield, title: t('about.quality.title') },
-    { icon: Award, title: t('about.experience.title') },
-    { icon: Clock, title: t('about.guarantee.title') },
+    { icon: Shield, title: t("about.quality.title") },
+    { icon: Award, title: t("about.experience.title") },
+    { icon: Clock, title: t("about.guarantee.title") },
   ];
 
   return (
@@ -87,7 +105,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
             >
               <h1 className="font-display text-4xl md:text-5xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-                {t('hero.title')}
+                {t("hero.title")}
               </h1>
             </motion.div>
 
@@ -97,7 +115,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
             >
-              {t('hero.subtitle')}
+              {t("hero.subtitle")}
             </motion.p>
 
             <motion.div
@@ -111,7 +129,7 @@ const Index = () => {
                 onClick={() => setIsOrderModalOpen(true)}
                 className="bg-gradient-forge hover:opacity-90 text-primary-foreground font-semibold px-8 shadow-glow transition-all hover:scale-[1.02]"
               >
-                {t('hero.cta.order')}
+                {t("hero.cta.order")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button
@@ -135,8 +153,8 @@ const Index = () => {
               className="flex flex-wrap justify-center gap-6 mt-12"
             >
               {features.map((feature, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="flex items-center gap-2 text-muted-foreground"
                   whileHover={{ scale: 1.05 }}
                 >
@@ -177,7 +195,9 @@ const Index = () => {
                 <div className="font-display text-5xl md:text-6xl font-bold text-primary mb-2">
                   <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="text-muted-foreground font-medium">{stat.label}</p>
+                <p className="text-muted-foreground font-medium">
+                  {stat.label}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -188,8 +208,8 @@ const Index = () => {
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-4">
           <SectionTitle
-            title={t('services.title')}
-            subtitle={t('services.subtitle')}
+            title={t("services.title")}
+            subtitle={t("services.subtitle")}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -212,9 +232,14 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <Button asChild variant="outline" size="lg" className="hover:scale-[1.02] transition-transform">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="hover:scale-[1.02] transition-transform"
+            >
               <Link to="/services">
-                {t('services.viewAll')}
+                {t("services.viewAll")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -229,8 +254,8 @@ const Index = () => {
       <section className="py-20 md:py-32 bg-card">
         <div className="container mx-auto px-4">
           <SectionTitle
-            title={t('projects.title')}
-            subtitle={t('projects.subtitle')}
+            title={t("projects.title")}
+            subtitle={t("projects.subtitle")}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -245,15 +270,22 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <Button asChild size="lg" className="bg-gradient-forge hover:opacity-90 text-primary-foreground hover:scale-[1.02] transition-transform">
+            <Button
+              asChild
+              size="lg"
+              className="bg-gradient-forge hover:opacity-90 text-primary-foreground hover:scale-[1.02] transition-transform"
+            >
               <Link to="/projects">
-                {t('projects.viewAll')}
+                {t("projects.viewAll")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </motion.div>
         </div>
       </section>
+
+      {/* Video Section */}
+      <VideoSection videoSrc={introVideo} language={language} />
 
       {/* CTA Section */}
       <section className="py-20 md:py-32 relative overflow-hidden">
@@ -266,14 +298,14 @@ const Index = () => {
             className="max-w-3xl mx-auto text-center"
           >
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              {language === 'uz' 
-                ? 'Bepul maslahat oling' 
-                : language === 'en' 
-                ? 'Get Free Consultation' 
-                : 'Получите бесплатную консультацию'}
+              {language === "uz"
+                ? "Bepul maslahat oling"
+                : language === "en"
+                  ? "Get Free Consultation"
+                  : "Получите бесплатную консультацию"}
             </h2>
             <p className="text-muted-foreground text-lg mb-8">
-              {t('hero.subtitle')}
+              {t("hero.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -281,7 +313,7 @@ const Index = () => {
                 onClick={() => setIsOrderModalOpen(true)}
                 className="bg-gradient-forge hover:opacity-90 text-primary-foreground font-semibold px-8 shadow-glow hover:scale-[1.02] transition-transform"
               >
-                {t('hero.cta.order')}
+                {t("hero.cta.order")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button
@@ -300,7 +332,10 @@ const Index = () => {
         </div>
       </section>
 
-      <OrderModal isOpen={isOrderModalOpen} onClose={() => setIsOrderModalOpen(false)} />
+      <OrderModal
+        isOpen={isOrderModalOpen}
+        onClose={() => setIsOrderModalOpen(false)}
+      />
     </Layout>
   );
 };

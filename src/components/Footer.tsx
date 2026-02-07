@@ -83,7 +83,7 @@ export const Footer = () => {
               <li className="flex items-center gap-2 text-muted-foreground">
                 <MessageCircle className="h-4 w-4 text-primary flex-shrink-0" />
                 <a 
-                  href="https://t.me/bobur_metalworks" 
+                  href="https://t.me/Bkforge" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
