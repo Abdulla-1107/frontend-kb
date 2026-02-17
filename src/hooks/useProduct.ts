@@ -7,7 +7,10 @@ export const useProduct = (props?: any) => {
   const getProduct = useQuery({
     queryKey: ["products"], // ✅ "products" (ko'plik)
     queryFn: () =>
-      api.get("/product", { params: props }).then((res) => res.data),
+      api.get("/product", { params: props }).then((res) => {
+        console.log("API response:", res.data, typeof res.data); // ← shu qatorni qo'shing
+        return res.data;
+      }),
   });
   const createProduct = useMutation({
     mutationFn: async (payload: any) => {
@@ -15,7 +18,7 @@ export const useProduct = (props?: any) => {
       return data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["product"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] }); // ✅
     },
   });
 
@@ -25,10 +28,9 @@ export const useProduct = (props?: any) => {
       return data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["product"] });
+      queryClient.invalidateQueries({ queryKey: ["products"] }); // ✅
     },
   });
-
   const getProductById = (id: string) =>
     useQuery({
       queryKey: ["product", id],
