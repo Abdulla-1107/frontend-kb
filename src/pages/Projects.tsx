@@ -23,8 +23,6 @@ const Projects = () => {
 
   const [filter, setFilter] = useState<FilterCategory>("all");
 
-  // 🔹 API dan kelgan products → ProjectCard formatiga moslash
-  // ✅ Keyin
   if (isLoading) {
     return (
       <Layout>
@@ -55,6 +53,8 @@ const Projects = () => {
 
   // 🔹 Static + API ni birlashtirish
   const allProjects = [...projects, ...apiProjects];
+  console.log("apiProjects:", apiProjects); // ← shu qatorni qo'shing
+  console.log("allProjects:", allProjects);
 
   const filters: { key: FilterCategory; label: string }[] = [
     { key: "all", label: t("projects.filter.all") },

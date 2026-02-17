@@ -8,8 +8,10 @@ export const useProduct = (props?: any) => {
     queryKey: ["products"], // ✅ "products" (ko'plik)
     queryFn: () =>
       api.get("/product", { params: props }).then((res) => {
-        console.log("API response:", res.data, typeof res.data); // ← shu qatorni qo'shing
-        return res.data;
+        console.log("raw res.data:", res.data, typeof res.data);
+        const result =
+          typeof res.data === "string" ? JSON.parse(res.data) : res.data;
+        return Array.isArray(result) ? result : (result?.data ?? []);
       }),
   });
   const createProduct = useMutation({
