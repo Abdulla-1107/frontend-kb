@@ -17,33 +17,6 @@ const ProjectDetail = () => {
   const { getProduct } = useProduct();
   const { data, isLoading } = getProduct;
 
-  // 🔹 API dan kelgan products → ProjectCard formatiga moslash (Projects.tsx dagidek)
-  const apiProjects = (data ?? []).map((p: any) => ({
-    id: p.id,
-    title: {
-      uz: p.name_uz,
-      ru: p.name_ru,
-      en: p.name_en,
-    },
-    description: {
-      uz: p.description_uz,
-      ru: p.description_ru,
-      en: p.description_en,
-    },
-    images: [p.image],
-    category: "gate" as const,
-    year: new Date(p.createdAt).getFullYear(),
-    // 🔹 API loyihalari uchun qo'shimcha maydonlarni default qiymat bilan qo'shish (xatolik oldini olish uchun)
-    materials: [], // Default bo'sh array
-    location: undefined, // Agar kerak bo'lsa, default qiymat
-  }));
-
-  // 🔹 Static + API ni birlashtirish
-  const allProjects = [...projects, ...apiProjects];
-
-  // 🔹 ID bo'yicha loyihani topish (id string, p.id number bo'lishi mumkin, shuning uchun String bilan solishtirish)
-  const project = allProjects.find((p) => String(p.id) === id);
-
   if (isLoading) {
     return (
       <Layout>
@@ -51,6 +24,38 @@ const ProjectDetail = () => {
       </Layout>
     );
   }
+
+  // 🔹 API dan kelgan products → ProjectCard formatiga moslash
+  const apiProjects = Array.isArray(data)
+    ? data.map((p: any) => ({
+        id: p.id,
+        title: {
+          uz: p.name_uz,
+          ru: p.name_ru,
+          en: p.name_en,
+        },
+        description: {
+          uz: p.description_uz,
+          ru: p.description_ru,
+          en: p.description_en,
+        },
+        images: [p.image],
+        category: "gate" as const,
+        price: p.price,
+        year: new Date(p.createdAt).getFullYear(),
+        materials: [],
+        location: undefined,
+      }))
+    : [];
+
+  // 🔹 Static + API ni birlashtirish
+  const allProjects = [...projects, ...apiProjects];
+
+  // 🔹 ID bo'yicha loyihani topish
+  const project = allProjects.find((p) => String(p.id) === id);
+
+  // 🔹 API projectimi yoki static projectmi
+  const isApiProject = project?.id?.includes("-");
 
   if (!project) {
     return (
@@ -145,6 +150,18 @@ const ProjectDetail = () => {
                   <span className="text-muted-foreground">{project.year}</span>
                 </div>
 
+                {/* Narx — faqat API projectlarda */}
+                {isApiProject && (
+                  <div className="flex items-center gap-3 text-foreground">
+                    <span className="font-medium">Narx:</span>
+                    <span className="text-primary font-bold text-xl">
+                      {project.price
+                        ? `${Number(project.price).toLocaleString()} so'm`
+                        : "Narx kelishiladi"}
+                    </span>
+                  </div>
+                )}
+
                 {project.materials?.length > 0 && (
                   <div className="flex items-start gap-3 text-foreground">
                     <Wrench className="h-5 w-5 text-primary mt-0.5" />
@@ -167,24 +184,31 @@ const ProjectDetail = () => {
                 )}
               </div>
 
-              <Button
-                size="lg"
-                onClick={() => setIsOrderModalOpen(true)}
-                className="bg-gradient-forge hover:opacity-90 text-primary-foreground font-semibold"
-              >
-                {t("project.order")}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              {/* Buyurtma button — faqat API projectlarda */}
+              {isApiProject && (
+                <Button
+                  size="lg"
+                  onClick={() => setIsOrderModalOpen(true)}
+                  className="bg-gradient-forge hover:opacity-90 text-primary-foreground font-semibold"
+                >
+                  {t("project.order")}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              )}
             </motion.div>
           </div>
         </div>
       </div>
 
-      <OrderModal
-        isOpen={isOrderModalOpen}
-        onClose={() => setIsOrderModalOpen(false)}
-        defaultService={project.category}
-      />
+      {/* OrderModal — faqat API projectlarda */}
+      {isApiProject && (
+        <OrderModal
+          isOpen={isOrderModalOpen}
+          onClose={() => setIsOrderModalOpen(false)}
+          defaultService={project.category}
+          productId={project.id}
+        />
+      )}
     </Layout>
   );
 };

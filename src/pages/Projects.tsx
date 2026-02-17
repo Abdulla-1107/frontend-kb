@@ -45,6 +45,7 @@ const Projects = () => {
         },
         images: [p.image],
         category: "gate" as const,
+        price: p.price,
         year: new Date(p.createdAt).getFullYear(),
       }))
     : [];

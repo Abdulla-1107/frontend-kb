@@ -60,7 +60,7 @@ const translations: Record<Language, Record<string, string>> = {
     'project.materials': 'Materiallar',
     'project.year': 'Yil',
     'project.location': 'Manzil',
-    'project.order': 'Shunga o\'xshash buyurtma berish',
+    'project.order': 'Buyurtma berish',
     
     // About
     'about.title': 'Biz haqimizda',

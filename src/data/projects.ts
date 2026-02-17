@@ -6,6 +6,7 @@ export interface Project {
   images: string[];
   materials?: string[]; // ← ? qo'shildi
   year: number;
+  price?: string;
   location?: { uz: string; en: string; ru: string };
 }
 
