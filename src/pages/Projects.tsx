@@ -14,7 +14,7 @@ type FilterCategory = "all" | "gate" | "door" | "fence";
 
 const Projects = () => {
   const { t, language } = useLanguage();
-  const { getProduct, } = useProduct();
+  const { getProduct } = useProduct();
   const { data, isLoading } = getProduct;
 
   const [filter, setFilter] = useState<FilterCategory>("all");

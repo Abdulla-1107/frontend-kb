@@ -5,11 +5,10 @@ export const useProduct = (props?: any) => {
   const queryClient = useQueryClient();
 
   const getProduct = useQuery({
-    queryKey: ["product", props],
+    queryKey: ["products"], // ✅ "products" (ko'plik)
     queryFn: () =>
       api.get("/product", { params: props }).then((res) => res.data),
   });
-
   const createProduct = useMutation({
     mutationFn: async (payload: any) => {
       const { data } = await api.post("/product", payload);
