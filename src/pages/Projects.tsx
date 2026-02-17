@@ -17,10 +17,21 @@ const Projects = () => {
   const { getProduct } = useProduct();
   const { data, isLoading } = getProduct;
 
+  // console.log(data);
+  console.log("Array.isArray(data):", Array.isArray(data));
+  console.log("typeof data:", typeof data);
+
   const [filter, setFilter] = useState<FilterCategory>("all");
 
   // 🔹 API dan kelgan products → ProjectCard formatiga moslash
   // ✅ Keyin
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="pt-32 text-center">Loading...</div>
+      </Layout>
+    );
+  }
   const apiProjects = Array.isArray(data)
     ? data.map((p: any) => ({
         id: p.id,
@@ -40,7 +51,7 @@ const Projects = () => {
       }))
     : [];
 
-  console.log(apiProjects);
+  // console.log(apiProjects);
 
   // 🔹 Static + API ni birlashtirish
   const allProjects = [...projects, ...apiProjects];
@@ -57,14 +68,6 @@ const Projects = () => {
     filter === "all"
       ? allProjects
       : allProjects.filter((p) => p.category === filter);
-
-  if (isLoading) {
-    return (
-      <Layout>
-        <div className="pt-32 text-center">Loading...</div>
-      </Layout>
-    );
-  }
 
   return (
     <Layout>
