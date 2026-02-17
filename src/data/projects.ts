@@ -4,7 +4,7 @@ export interface Project {
   description: { uz: string; en: string; ru: string };
   category: "gate" | "door" | "fence";
   images: string[];
-  materials: string[];
+  materials?: string[]; // ← ? qo'shildi
   year: number;
   location?: { uz: string; en: string; ru: string };
 }

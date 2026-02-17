@@ -31,7 +31,7 @@ const ProjectDetail = () => {
       en: p.description_en,
     },
     images: [p.image],
-    category: "gate",
+    category: "gate" as const,
     year: new Date(p.createdAt).getFullYear(),
     // 🔹 API loyihalari uchun qo'shimcha maydonlarni default qiymat bilan qo'shish (xatolik oldini olish uchun)
     materials: [], // Default bo'sh array

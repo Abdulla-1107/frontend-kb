@@ -20,22 +20,25 @@ const Projects = () => {
   const [filter, setFilter] = useState<FilterCategory>("all");
 
   // 🔹 API dan kelgan products → ProjectCard formatiga moslash
-  const apiProjects = (data ?? []).map((p: any) => ({
-    id: p.id,
-    title: {
-      uz: p.name_uz,
-      ru: p.name_ru,
-      en: p.name_en,
-    },
-    description: {
-      uz: p.description_uz,
-      ru: p.description_ru,
-      en: p.description_en,
-    },
-    images: [p.image],
-    category: "gate",
-    year: new Date(p.createdAt).getFullYear(),
-  }));
+  // ✅ Keyin
+  const apiProjects = Array.isArray(data)
+    ? data.map((p: any) => ({
+        id: p.id,
+        title: {
+          uz: p.name_uz,
+          ru: p.name_ru,
+          en: p.name_en,
+        },
+        description: {
+          uz: p.description_uz,
+          ru: p.description_ru,
+          en: p.description_en,
+        },
+        images: [p.image],
+        category: "gate" as const,
+        year: new Date(p.createdAt).getFullYear(),
+      }))
+    : [];
 
   console.log(apiProjects);
 
