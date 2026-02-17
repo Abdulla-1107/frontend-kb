@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https:/api.boburkovka.uz",
+  baseURL: "https://api.boburkovka.uz",
 });
 
 export default api;
