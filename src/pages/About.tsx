@@ -1,109 +1,148 @@
-import { motion } from 'framer-motion';
-import { Shield, Award, Clock, Hammer, RefreshCw, Wrench, Paintbrush } from 'lucide-react';
-import { Layout } from '@/components/Layout';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { SectionTitle } from '@/components/SectionTitle';
-import { AnimatedCounter } from '@/components/AnimatedCounter';
-import heroImage from '@/assets/hero-metalwork.jpg';
+import { motion } from "framer-motion";
+import {
+  Shield,
+  Award,
+  Clock,
+  Hammer,
+  RefreshCw,
+  Wrench,
+  Paintbrush,
+} from "lucide-react";
+import { Layout } from "@/components/Layout";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { SectionTitle } from "@/components/SectionTitle";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+import heroImage from "@/assets/hero-metalwork.jpg";
+import introVideo from "@/assets/video_uyx4.mp4";
+import VideoSection from "@/components/Video";
 
 const About = () => {
   const { t, language } = useLanguage();
 
   const milestones = [
     {
-      year: '2009',
-      title: language === 'uz' ? 'Ish boshlandi' : language === 'en' ? 'Started Work' : 'Начало работы',
-      description: language === 'uz' 
-        ? 'Birinchi ustaxona ochildi' 
-        : language === 'en'
-        ? 'First workshop opened'
-        : 'Открылась первая мастерская',
+      year: "2009",
+      title:
+        language === "uz"
+          ? "Ish boshlandi"
+          : language === "en"
+            ? "Started Work"
+            : "Начало работы",
+      description:
+        language === "uz"
+          ? "Birinchi ustaxona ochildi"
+          : language === "en"
+            ? "First workshop opened"
+            : "Открылась первая мастерская",
     },
     {
-      year: '2014',
-      title: language === 'uz' ? '100-chi loyiha' : language === 'en' ? '100th Project' : '100-й проект',
-      description: language === 'uz'
-        ? 'Yirik loyihalar boshlanishi'
-        : language === 'en'
-        ? 'Large projects started'
-        : 'Начало крупных проектов',
+      year: "2014",
+      title:
+        language === "uz"
+          ? "100-chi loyiha"
+          : language === "en"
+            ? "100th Project"
+            : "100-й проект",
+      description:
+        language === "uz"
+          ? "Yirik loyihalar boshlanishi"
+          : language === "en"
+            ? "Large projects started"
+            : "Начало крупных проектов",
     },
     {
-      year: '2019',
-      title: language === 'uz' ? 'Kengayish' : language === 'en' ? 'Expansion' : 'Расширение',
-      description: language === 'uz'
-        ? 'Yangi zamonaviy jihozlar'
-        : language === 'en'
-        ? 'New modern equipment'
-        : 'Новое современное оборудование',
+      year: "2019",
+      title:
+        language === "uz"
+          ? "Kengayish"
+          : language === "en"
+            ? "Expansion"
+            : "Расширение",
+      description:
+        language === "uz"
+          ? "Yangi zamonaviy jihozlar"
+          : language === "en"
+            ? "New modern equipment"
+            : "Новое современное оборудование",
     },
     {
-      year: '2024',
-      title: language === 'uz' ? 'Bugun' : language === 'en' ? 'Today' : 'Сегодня',
-      description: language === 'uz'
-        ? '500+ muvaffaqiyatli loyiha'
-        : language === 'en'
-        ? '500+ successful projects'
-        : '500+ успешных проектов',
+      year: "2024",
+      title:
+        language === "uz" ? "Bugun" : language === "en" ? "Today" : "Сегодня",
+      description:
+        language === "uz"
+          ? "500+ muvaffaqiyatli loyiha"
+          : language === "en"
+            ? "500+ successful projects"
+            : "500+ успешных проектов",
     },
   ];
 
   const values = [
     {
       icon: Shield,
-      title: t('about.quality.title'),
-      description: language === 'uz'
-        ? 'Profil temir, 12x12 va 14x14 kvadrat temir, shveller — eng yaxshi materiallar'
-        : language === 'en'
-        ? 'Profile metal, 12x12 and 14x14 square metal, channel — best quality materials'
-        : 'Профильный металл, квадрат 12x12 и 14x14, швеллер — лучшие материалы',
+      title: t("about.quality.title"),
+      description:
+        language === "uz"
+          ? "Profil temir, 12x12 va 14x14 kvadrat temir, shveller — eng yaxshi materiallar"
+          : language === "en"
+            ? "Profile metal, 12x12 and 14x14 square metal, channel — best quality materials"
+            : "Профильный металл, квадрат 12x12 и 14x14, швеллер — лучшие материалы",
     },
     {
       icon: Award,
-      title: t('about.experience.title'),
-      description: language === 'uz'
-        ? '15 yillik professional tajriba'
-        : language === 'en'
-        ? '15 years of professional experience'
-        : '15 лет профессионального опыта',
+      title: t("about.experience.title"),
+      description:
+        language === "uz"
+          ? "15 yillik professional tajriba"
+          : language === "en"
+            ? "15 years of professional experience"
+            : "15 лет профессионального опыта",
     },
     {
       icon: Clock,
-      title: t('about.guarantee.title'),
-      description: language === 'uz'
-        ? '6 oydan 1 yilgacha kafolat — nosozlik bo\'lsa bepul ta\'mirlaymiz'
-        : language === 'en'
-        ? '6 months to 1 year warranty — free repair if defective'
-        : 'Гарантия 6 месяцев — 1 год — бесплатный ремонт при неисправности',
+      title: t("about.guarantee.title"),
+      description:
+        language === "uz"
+          ? "6 oydan 1 yilgacha kafolat — nosozlik bo'lsa bepul ta'mirlaymiz"
+          : language === "en"
+            ? "6 months to 1 year warranty — free repair if defective"
+            : "Гарантия 6 месяцев — 1 год — бесплатный ремонт при неисправности",
     },
   ];
 
   const services = [
     {
       icon: Wrench,
-      title: t('about.fullService.title'),
-      description: t('about.fullService.description'),
+      title: t("about.fullService.title"),
+      description: t("about.fullService.description"),
     },
     {
       icon: RefreshCw,
-      title: t('about.restoration.title'),
-      description: t('about.restoration.description'),
+      title: t("about.restoration.title"),
+      description: t("about.restoration.description"),
     },
     {
       icon: Paintbrush,
-      title: language === 'uz' ? 'Bo\'yash xizmati' : language === 'en' ? 'Painting Service' : 'Услуга покраски',
-      description: language === 'uz'
-        ? 'Barcha mahsulotlar mijoz tanlagan rangda bo\'yaladi'
-        : language === 'en'
-        ? 'All products are painted in the color chosen by the client'
-        : 'Все изделия окрашиваются в цвет, выбранный клиентом',
+      title:
+        language === "uz"
+          ? "Bo'yash xizmati"
+          : language === "en"
+            ? "Painting Service"
+            : "Услуга покраски",
+      description:
+        language === "uz"
+          ? "Barcha mahsulotlar mijoz tanlagan rangda bo'yaladi"
+          : language === "en"
+            ? "All products are painted in the color chosen by the client"
+            : "Все изделия окрашиваются в цвет, выбранный клиентом",
     },
   ];
 
   const stats = [
-    { value: 15, suffix: '+', label: t('stats.years') },
-    { value: 500, suffix: '+', label: t('stats.projects') },
-    { value: 450, suffix: '+', label: t('stats.clients') },
+    { value: 15, suffix: "+", label: t("stats.years") },
+    { value: 500, suffix: "+", label: t("stats.projects") },
+    { value: 450, suffix: "+", label: t("stats.clients") },
   ];
 
   return (
@@ -118,13 +157,13 @@ const About = () => {
               transition={{ duration: 0.6 }}
             >
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                {t('about.title')}
+                {t("about.title")}
               </h1>
               <p className="text-xl text-muted-foreground mb-6">
-                {t('about.subtitle')}
+                {t("about.subtitle")}
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                {t('about.story')}
+                {t("about.story")}
               </p>
             </motion.div>
 
@@ -142,7 +181,7 @@ const About = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
               </div>
-              
+
               {/* Floating stats card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -155,8 +194,12 @@ const About = () => {
                     <Hammer className="w-6 h-6 text-primary-foreground" />
                   </div>
                   <div>
-                    <div className="font-display text-2xl font-bold text-foreground">15+</div>
-                    <div className="text-sm text-muted-foreground">{t('stats.years')}</div>
+                    <div className="font-display text-2xl font-bold text-foreground">
+                      15+
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {t("stats.years")}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -180,7 +223,9 @@ const About = () => {
                   <div className="font-display text-5xl md:text-6xl font-bold text-primary mb-2">
                     <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="text-muted-foreground font-medium">{stat.label}</p>
+                  <p className="text-muted-foreground font-medium">
+                    {stat.label}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -190,8 +235,20 @@ const About = () => {
         {/* Services Highlight Section */}
         <section className="container mx-auto px-4 mb-20">
           <SectionTitle
-            title={language === 'uz' ? 'Bizning xizmatlarimiz' : language === 'en' ? 'Our Services' : 'Наши услуги'}
-            subtitle={language === 'uz' ? 'To\'liq xizmat — ishlab chiqarishdan o\'rnatishgacha' : language === 'en' ? 'Full service — from production to installation' : 'Полный сервис — от производства до установки'}
+            title={
+              language === "uz"
+                ? "Bizning xizmatlarimiz"
+                : language === "en"
+                  ? "Our Services"
+                  : "Наши услуги"
+            }
+            subtitle={
+              language === "uz"
+                ? "To'liq xizmat — ishlab chiqarishdan o'rnatishgacha"
+                : language === "en"
+                  ? "Full service — from production to installation"
+                  : "Полный сервис — от производства до установки"
+            }
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -205,10 +262,10 @@ const About = () => {
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20"
               >
-                <motion.div 
+                <motion.div
                   className="w-14 h-14 rounded-xl bg-gradient-forge flex items-center justify-center mb-5"
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
                   <service.icon className="w-7 h-7 text-primary-foreground" />
                 </motion.div>
@@ -224,7 +281,13 @@ const About = () => {
         {/* Values Section */}
         <section className="container mx-auto px-4 mb-20">
           <SectionTitle
-            title={language === 'uz' ? 'Bizning qadriyatlarimiz' : language === 'en' ? 'Our Values' : 'Наши ценности'}
+            title={
+              language === "uz"
+                ? "Bizning qadriyatlarimiz"
+                : language === "en"
+                  ? "Our Values"
+                  : "Наши ценности"
+            }
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -238,7 +301,7 @@ const About = () => {
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-all duration-300"
               >
-                <motion.div 
+                <motion.div
                   className="w-14 h-14 rounded-xl bg-muted flex items-center justify-center mb-5"
                   whileHover={{ scale: 1.1 }}
                 >
@@ -256,8 +319,16 @@ const About = () => {
         {/* Timeline Section */}
         <section className="container mx-auto px-4">
           <SectionTitle
-            title={language === 'uz' ? 'Bizning yo\'limiz' : language === 'en' ? 'Our Journey' : 'Наш путь'}
+            title={
+              language === "uz"
+                ? "Bizning yo'limiz"
+                : language === "en"
+                  ? "Our Journey"
+                  : "Наш путь"
+            }
           />
+
+          <VideoSection videoSrc={introVideo} language={language} />
 
           <div className="max-w-3xl mx-auto">
             {milestones.map((milestone, index) => (
@@ -269,13 +340,15 @@ const About = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative pl-8 pb-12 last:pb-0 border-l-2 border-border"
               >
-                <motion.div 
+                <motion.div
                   className="absolute left-0 top-0 w-4 h-4 -translate-x-[9px] rounded-full bg-primary"
                   whileInView={{ scale: [0, 1.2, 1] }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 />
-                <div className="text-sm text-primary font-semibold mb-1">{milestone.year}</div>
+                <div className="text-sm text-primary font-semibold mb-1">
+                  {milestone.year}
+                </div>
                 <h3 className="font-display text-xl font-bold text-foreground mb-2">
                   {milestone.title}
                 </h3>

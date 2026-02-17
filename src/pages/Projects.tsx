@@ -8,12 +8,39 @@ import { projects } from "@/data/projects";
 import { Button } from "@/components/ui/button";
 import VideoSection from "@/components/Video";
 import introVideo from "@/assets/video_uyx2.mp4";
+import { useProduct } from "@/hooks/useProduct";
 
 type FilterCategory = "all" | "gate" | "door" | "fence";
 
 const Projects = () => {
   const { t, language } = useLanguage();
+  const { getProduct, } = useProduct();
+  const { data, isLoading } = getProduct;
+
   const [filter, setFilter] = useState<FilterCategory>("all");
+
+  // 🔹 API dan kelgan products → ProjectCard formatiga moslash
+  const apiProjects = (data ?? []).map((p: any) => ({
+    id: p.id,
+    title: {
+      uz: p.name_uz,
+      ru: p.name_ru,
+      en: p.name_en,
+    },
+    description: {
+      uz: p.description_uz,
+      ru: p.description_ru,
+      en: p.description_en,
+    },
+    images: [p.image],
+    category: "gate",
+    year: new Date(p.createdAt).getFullYear(),
+  }));
+
+  console.log(apiProjects);
+
+  // 🔹 Static + API ni birlashtirish
+  const allProjects = [...projects, ...apiProjects];
 
   const filters: { key: FilterCategory; label: string }[] = [
     { key: "all", label: t("projects.filter.all") },
@@ -22,8 +49,19 @@ const Projects = () => {
     { key: "fence", label: t("projects.filter.fences") },
   ];
 
+  // 🔹 Filter ishlashi
   const filteredProjects =
-    filter === "all" ? projects : projects.filter((p) => p.category === filter);
+    filter === "all"
+      ? allProjects
+      : allProjects.filter((p) => p.category === filter);
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="pt-32 text-center">Loading...</div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -66,6 +104,7 @@ const Projects = () => {
             ))}
           </motion.div>
 
+          {/* Video */}
           <VideoSection videoSrc={introVideo} language={language} />
 
           {filteredProjects.length === 0 && (
