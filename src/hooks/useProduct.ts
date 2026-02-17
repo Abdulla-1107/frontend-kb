@@ -7,17 +7,10 @@ export const useProduct = (props?: any) => {
   const getProduct = useQuery({
     queryKey: ["products"], // ✅ "products" (ko'plik)
     queryFn: () =>
-      api
-        .get("/product", { params: props })
-        .then((res) => {
-          const result =
-            typeof res.data === "string" ? JSON.parse(res.data) : res.data;
-          return Array.isArray(result) ? result : (result?.data ?? []);
-        })
-        .catch((err) => {
-          console.log("API ERROR:", err.message);
-          return [];
-        }),
+      api.get("/product", { params: props }).then((res) => {
+        console.log("API response:", res.data, typeof res.data); // ← shu qatorni qo'shing
+        return res.data;
+      }),
   });
   const createProduct = useMutation({
     mutationFn: async (payload: any) => {
