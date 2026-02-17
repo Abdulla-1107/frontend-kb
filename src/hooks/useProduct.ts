@@ -10,13 +10,12 @@ export const useProduct = (props?: any) => {
       api
         .get("/product", { params: props })
         .then((res) => {
-          console.log("status:", res.status);
-          console.log("raw res.data:", res.data);
-          console.log("typeof res.data:", typeof res.data);
-          return res.data;
+          const result =
+            typeof res.data === "string" ? JSON.parse(res.data) : res.data;
+          return Array.isArray(result) ? result : (result?.data ?? []);
         })
         .catch((err) => {
-          console.log("API ERROR:", err.message, err.response?.data);
+          console.log("API ERROR:", err.message);
           return [];
         }),
   });
